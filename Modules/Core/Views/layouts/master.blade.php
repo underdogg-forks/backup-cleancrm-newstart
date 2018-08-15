@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
 
     <title>{{ config('fi.headerTitleText') }}</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 
     @include('layouts._head')
 
@@ -23,7 +27,6 @@
 <div class="app-body">
 
     @include('layouts._sidebar')
-
     <main class="main">
         <div class="container-fluid pt-3">
             @yield('content')

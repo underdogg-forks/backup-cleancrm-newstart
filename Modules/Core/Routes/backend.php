@@ -16,7 +16,10 @@
 //'middleware' => ['role:administrator|owner']
 
 
-Route::group(['prefix' => 'admincp', 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
+//Route::group([], function () {
+
+
+Route::group(['prefix' => 'admincp', 'middleware' => ['web'], 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
 
 
 // Dashboard
@@ -33,3 +36,5 @@ Route::group(['prefix' => 'admincp', 'namespace' => 'Modules\Core\Controllers\Ad
     Route::resource('permissions', 'PermissionsController');
     Route::resource('roles', 'RolesController');
 });
+
+//});
