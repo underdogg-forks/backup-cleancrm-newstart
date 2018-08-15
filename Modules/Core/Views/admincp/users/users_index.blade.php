@@ -50,7 +50,7 @@
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 ajax: '{!! route('api.users.data') !!}',
                 columns: [
-                    {data: 'namelink', name: 'name'},
+                    {data: 'nomelink', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'edit', name: 'edit', orderable: false, searchable: false},
                     {data: 'delete', name: 'delete', orderable: false, searchable: false},

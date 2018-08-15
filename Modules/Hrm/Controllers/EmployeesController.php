@@ -25,13 +25,29 @@ class EmployeesController extends Controller
     }
 
 
-
     public function anyData()
     {
-        $employees = Employee::select(['id', 'first_name', 'last_name', 'bsn', 'idnr']);
+        $permissions = Permission::select(['id', 'name', 'display_name', 'description']);
+
+        return Datatables::of($permissions)
+            ->addColumn('id', function ($permissions) {
+                return '<a href="permissions/' . $permissions->id . '" ">' . $permissions->display_name . '</a>';
+            })
+            ->make(true);
+    }
+
+
+
+
+
+    public function oldData()
+    {
+        //, 'first_name', 'last_name', 'bsn', 'idnr'])->orderBy('last_name', 'ASC')->orderBy('first_name', 'ASC')
+
+        $employees = Employee::select(['id', 'first_name']);
 
         return Datatables::of($employees)
-            ->addColumn('namelink', function ($employees) {
+            ->addColumn('first_name', function ($employees) {
                 return '<a href="#">' . $employees->first_name . '</a>';
             })
             ->addColumn('last_name', function ($employees) {
@@ -44,15 +60,18 @@ class EmployeesController extends Controller
                 return '<a href="employee/' . $employees->id . '" ">' . $employees->idnr . '</a>';
             })
             ->addColumn('edit', '
-                <a href="{{ route(\'employee.edit\', $id) }}" class="btn btn-success" >Edit</a>')
+                <a href="{{ route(\'employees.edit\', $id) }}" class="btn btn-success" >Edit</a>')
             ->addColumn('delete', '
-                <form action="{{ route(\'employee.destroy\', $id) }}" method="POST">
+                <form action="{{ route(\'employees.destroy\', $id) }}" method="POST">
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" name="submit" value="Delete" class="btn btn-danger" onClick="return confirm(\'Are you sure?\')"">
 
             {{csrf_field()}}
             </form>')
-            ->rawColumns(['namelink', 'email', 'edit', 'delete'])
+            ->rawColumns(['first_name', 'email', 'edit', 'delete'])
+            //->orderColumn('last_name', '-name $1')
+            ->orderColumns(['first_name', 'email'], '-:column $1')
+
             ->make(true);
     }
 

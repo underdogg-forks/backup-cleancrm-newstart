@@ -38,7 +38,7 @@ class UsersController extends Controller
         $users = User::select(['id', 'name', 'email']);
 
         return Datatables::of($users)
-            ->addColumn('namelink', function ($users) {
+            ->addColumn('link_to_user_name', function ($users) {
                 return '<a href="#">' . $users->name . '</a>';
             })
             ->addColumn('email', function ($users) {
