@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\Controllers\AdminCP;
+namespace Modules\Hrm\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Core\Models\User;
-use Modules\Core\Models\Employee;
+use Modules\Hrm\Models\Employee;
 use Modules\Core\Models\Role;
 use Yajra\Datatables\Facades\Datatables;
 use Modules\Core\Models\Permission;
@@ -21,21 +21,27 @@ class EmployeesController extends Controller
     // Index Page for Employees
     public function index()
     {
-        return view('admincp.employees.employees_index');
+        return view('hrm.employees.employees_index');
     }
 
 
 
     public function anyData()
     {
-        $employees = Employee::select(['id', 'name', 'email']);
+        $employees = Employee::select(['id', 'first_name', 'last_name', 'bsn', 'idnr']);
 
         return Datatables::of($employees)
             ->addColumn('namelink', function ($employees) {
-                return '<a href="#">' . $employees->name . '</a>';
+                return '<a href="#">' . $employees->first_name . '</a>';
             })
-            ->addColumn('email', function ($employees) {
-                return '<a href="employee/' . $employees->id . '" ">' . $employees->email . '</a>';
+            ->addColumn('last_name', function ($employees) {
+                return '<a href="employee/' . $employees->id . '" ">' . $employees->last_name . '</a>';
+            })
+            ->addColumn('bsn', function ($employees) {
+                return '<a href="employee/' . $employees->id . '" ">' . $employees->bsn . '</a>';
+            })
+            ->addColumn('idnr', function ($employees) {
+                return '<a href="employee/' . $employees->id . '" ">' . $employees->idnr . '</a>';
             })
             ->addColumn('edit', '
                 <a href="{{ route(\'employee.edit\', $id) }}" class="btn btn-success" >Edit</a>')

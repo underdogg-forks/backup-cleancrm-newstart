@@ -8,18 +8,20 @@
     <table class="table table-hover table-bordered table-striped" id="employees-table">
         <thead>
         <tr>
-
-            <th>Name</th>
-            <th>display_name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>BSN</th>
+            <th>ID Nr</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tfoot>
         <tr>
-
-            <th>Name</th>
-            <th>display_name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>BSN</th>
+            <th>ID Nr</th>
             <th></th>
             <th></th>
         </tr>
@@ -46,7 +48,9 @@
                 ajax: '{!! route('api.employees.data') !!}',
                 columns: [
                     {data: 'namelink', name: 'name'},
-                    {data: 'email', name: 'email'},
+                    {data: 'last_name', name: 'last_name'},
+                    {data: 'bsn', name: 'last_name'},
+                    {data: 'idnr', name: 'last_name'},
                     {data: 'edit', name: 'edit', orderable: false, searchable: false},
                     {data: 'delete', name: 'delete', orderable: false, searchable: false},
                 ]

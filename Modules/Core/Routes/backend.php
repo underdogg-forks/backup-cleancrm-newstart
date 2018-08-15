@@ -32,7 +32,6 @@ Route::group(['prefix' => 'admincp', 'middleware' => 'web', 'namespace' => 'Modu
 
 
         Route::resource('users', 'UsersController');
-        Route::resource('employees', 'EmployeesController');
         Route::resource('permissions', 'PermissionsController');
         Route::resource('roles', 'RolesController');
     });
@@ -41,6 +40,5 @@ Route::group(['prefix' => 'admincp', 'middleware' => 'web', 'namespace' => 'Modu
 Route::group(['prefix' => 'api', 'middleware' => 'web', 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
     Route::get('rolesdata', ['as' => 'api.roles.data', 'uses' => 'RolesController@anyData']);
     Route::get('usersdata', ['as' => 'api.users.data', 'uses' => 'UsersController@anyData']);
-    Route::get('employeesdata', ['as' => 'api.employees.data', 'uses' => 'EmployeesController@anyData']);
     Route::get('permissionsdata', ['as' => 'api.permissions.data', 'uses' => 'PermissionsController@anyData']);
 }); // End of ADMIN group
