@@ -15,6 +15,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('employees.index', ['status' => 'active']) }}">
+                    <i class="nav-icon fa fa-users"></i> <span>Employees</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('users.index', ['status' => 'active']) }}">
                     <i class="nav-icon fa fa-users"></i> <span>Users</span>
                 </a>
