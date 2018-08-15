@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -166,19 +166,15 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
+        //Laravel\Tinker\TinkerServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
-
+        Collective\Html\HtmlServiceProvider::class,
 
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -231,7 +227,8 @@ return [
 
 
         'Laratrust'   => Laratrust\LaratrustFacade::class,
-
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
 
     ],
