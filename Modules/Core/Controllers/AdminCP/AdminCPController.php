@@ -26,7 +26,7 @@ class AdminCPController extends Controller
         //$n_roles = Role::all()->count();
         //$n_perms = Permission::all()->count();
 
-$user = Auth::id();
+$user = Auth::user()->name;
         dd($user);
         //$n_logged = Auth::user()->name;
         $data = [
