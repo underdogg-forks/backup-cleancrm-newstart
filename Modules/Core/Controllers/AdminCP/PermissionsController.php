@@ -16,7 +16,7 @@ class PermissionsController extends Controller
     {
         //
         $permissions = Permission::paginate(10);
-        //dd($users);
+        dd($permissions);
 
         $params = [
             'title' => 'Permissions Listing',
