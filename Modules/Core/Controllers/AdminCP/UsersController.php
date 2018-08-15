@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Core\Models\User;
 use Modules\Core\Models\Role;
+use Yajra\Datatables\Facades\Datatables;
 use Modules\Core\Models\Permission;
 
 class UsersController extends Controller
@@ -27,17 +28,46 @@ class UsersController extends Controller
             'users' => $users,
         ];
 
-        return view('admincp.users.users_list')->with($params);
+        return view('admincp.users.users_index')->with($params);
     }
+
+
+
+    public function anyData()
+    {
+        $users = User::select(['id', 'name', 'email']);
+
+        return Datatables::of($users)
+            ->addColumn('namelink', function ($users) {
+                return '<a href="#">' . $users->name . '</a>';
+            })
+            ->addColumn('email', function ($users) {
+                return '<a href="users/' . $users->id . '" ">' . $users->email . '</a>';
+            })
+            ->addColumn('edit', '
+                <a href="{{ route(\'users.edit\', $id) }}" class="btn btn-success" >Edit</a>')
+            ->addColumn('delete', '
+                <form action="{{ route(\'users.destroy\', $id) }}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" name="submit" value="Delete" class="btn btn-danger" onClick="return confirm(\'Are you sure?\')"">
+
+            {{csrf_field()}}
+            </form>')
+            ->rawColumns(['namelink', 'email', 'edit', 'delete'])
+            ->make(true);
+    }
+
+
+
 
     // Create User Page
     public function create()
     {
-        $roles = Role::all();
+        $users = Role::all();
 
         $params = [
             'title' => 'Create User',
-            'roles' => $roles,
+            'users' => $users,
         ];
 
         return view('admincp.users.users_create')->with($params);
@@ -90,14 +120,14 @@ class UsersController extends Controller
         try {
             $user = User::findOrFail($id);
 
-            //$roles = Role::all();
-            $roles = Role::with('permissions')->get();
+            //$users = Role::all();
+            $users = Role::with('permissions')->get();
             $permissions = Permission::all();
 
             $params = [
                 'title' => 'Edit User',
                 'user' => $user,
-                'roles' => $roles,
+                'users' => $users,
                 'permissions' => $permissions,
             ];
 
@@ -126,9 +156,9 @@ class UsersController extends Controller
             $user->save();
 
             // Update role of the user
-            $roles = $user->roles;
+            $users = $user->users;
 
-            foreach ($roles as $key => $value) {
+            foreach ($users as $key => $value) {
                 $user->detachRole($value);
             }
 
@@ -155,9 +185,9 @@ class UsersController extends Controller
             $user = User::findOrFail($id);
 
             // Detach from Role
-            $roles = $user->roles;
+            $users = $user->users;
 
-            foreach ($roles as $key => $value) {
+            foreach ($users as $key => $value) {
                 $user->detachRole($value);
             }
 

@@ -35,9 +35,6 @@ class RolesController extends Controller
 
     public function anyData()
     {
-        //->with('addresses')
-
-
         $roles = Role::select(['id', 'name', 'display_name', 'description']);
 
         return Datatables::of($roles)
@@ -59,11 +56,7 @@ class RolesController extends Controller
 
             {{csrf_field()}}
             </form>')
-
             ->rawColumns(['namelink', 'display_name', 'description', 'edit', 'delete'])
-
-
-
             ->make(true);
     }
 

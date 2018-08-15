@@ -5,10 +5,12 @@ namespace Modules\Core\Controllers\AdminCP;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Core\Models\User;
-use Modules\Core\Models\Role;
+
 use Illuminate\Support\Facades\Auth;
 use Modules\Core\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Facades\Datatables;
+use Modules\Core\Models\Role;
 
 class PermissionsController extends Controller
 {
@@ -31,8 +33,46 @@ class PermissionsController extends Controller
             'permissions' => $permissions,
         ];
 
-        return view('admincp.permissions.perm_list')->with($params);
+        return view('admincp.permissions.permissions_index')->with($params);
     }
+
+
+
+
+    public function anyData()
+    {
+        $permissions = Permission::select(['id', 'name', 'display_name', 'description']);
+
+        return Datatables::of($permissions)
+            ->addColumn('namelink', function ($permissions) {
+                return '<a href="#">' . $permissions->name . '</a>';
+            })
+            ->addColumn('display_name', function ($permissions) {
+                return '<a href="permissions/' . $permissions->id . '" ">' . $permissions->display_name . '</a>';
+            })
+            ->addColumn('description', function ($permissions) {
+                return '<a href="permissions/' . $permissions->id . '" ">' . $permissions->description . '</a>';
+            })
+            ->addColumn('edit', '
+                <a href="{{ route(\'permissions.edit\', $id) }}" class="btn btn-success" >Edit</a>')
+            ->addColumn('delete', '
+                <form action="{{ route(\'permissions.destroy\', $id) }}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" name="submit" value="Delete" class="btn btn-danger" onClick="return confirm(\'Are you sure?\')"">
+
+            {{csrf_field()}}
+            </form>')
+            ->rawColumns(['namelink', 'display_name', 'description', 'edit', 'delete'])
+            ->make(true);
+    }
+
+
+
+
+
+
+
+
 
     // Permission Create Page
     public function create()

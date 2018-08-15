@@ -24,9 +24,6 @@
 Route::group(['prefix' => 'admincp', 'middleware' => 'web', 'namespace' => 'Modules\Core\Controllers\AdminCP'],
     function () {
 
-
-// Dashboard
-//Route::get('/dashboard', 'HomeController@index')->name('dashboard');
         Route::get('/', '\Modules\Core\Controllers\AdminCP\HomeController@admincp')->name('admincp');
         //Route::get('/', ['uses' => 'AdminCPController@index', 'as' => 'dashboard.index']);
         Route::get('dashboard', ['uses' => 'HomeController@index', 'as' => 'dashboard.index']);
@@ -41,9 +38,7 @@ Route::group(['prefix' => 'admincp', 'middleware' => 'web', 'namespace' => 'Modu
 
 
 Route::group(['prefix' => 'api', 'middleware' => 'web', 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
-    Route::get('relationsdata', ['as' => 'api.roles.data', 'uses' => 'RolesController@anyData']);
-
+    Route::get('rolesdata', ['as' => 'api.roles.data', 'uses' => 'RolesController@anyData']);
+    Route::get('usersdata', ['as' => 'api.users.data', 'uses' => 'UsersController@anyData']);
+    Route::get('permissionsdata', ['as' => 'api.permissions.data', 'uses' => 'PermissionsController@anyData']);
 }); // End of ADMIN group
-
-
-//});
