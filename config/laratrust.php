@@ -18,7 +18,7 @@ return [
     | are going to be used are the ones inside the 'user_models' array.
     |
     */
-    'use_morph_map' => false,
+    'use_morph_map' => true,
 
     /*
     |--------------------------------------------------------------------------
