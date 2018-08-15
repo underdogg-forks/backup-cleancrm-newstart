@@ -11,10 +11,17 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 //Auth::routes();
 
-Route::get('/home', '\Modules\Core\Controllers\AdminCP\HomeController@admincp')->name('admincp');
+/*Route::get('/', function () {
+    return view('welcome');
+});
+
+
+Route::get('/', '\Modules\Core\Controllers\AdminCP\FrontendController@welcome')->name('frontend');*/

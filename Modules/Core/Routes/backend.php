@@ -18,8 +18,11 @@
 
 //Route::group([], function () {
 
+//'middleware' => ['role:administrator|owner']
 
-Route::group(['prefix' => 'admincp', 'middleware' => ['web'], 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
+
+
+Route::group(['prefix' => 'admincp', 'middleware' => 'web', 'namespace' => 'Modules\Core\Controllers\AdminCP'], function () {
 
 
 // Dashboard
