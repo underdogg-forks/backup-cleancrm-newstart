@@ -67,7 +67,7 @@ return [
     |
     */
     'user_models' => [
-        'users' => 'App\User',
+        'users' => 'Modules\Core\Models\User',
     ],
 
     /*
@@ -84,17 +84,17 @@ return [
         /**
          * Role model
          */
-        'role' => 'App\Role',
+        'role' => 'Modules\Core\Models\Role',
 
         /**
          * Permission model
          */
-        'permission' => 'App\Permission',
+        'permission' => 'Modules\Core\Models\Permission',
 
         /**
          * Team model
          */
-        'team' => 'App\Team',
+        'team' => 'Modules\Core\Models\Team',
 
     ],
 

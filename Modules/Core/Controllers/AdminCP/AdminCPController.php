@@ -4,9 +4,9 @@ namespace Modules\Core\Controllers\AdminCP;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\Permission;
+use Modules\Core\Models\User;
+use Modules\Core\Models\Role;
+use Modules\Core\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -22,18 +22,21 @@ class AdminCPController extends Controller
     public function index()
     {
         $data = [];
-        $n_users = User::all()->count();
-        $n_roles = Role::all()->count();
-        $n_perms = Permission::all()->count();
-        $n_logged = Auth::user()->name;
+        //$n_users = User::all()->count();
+        //$n_roles = Role::all()->count();
+        //$n_perms = Permission::all()->count();
+
+$user = Auth::id();
+        dd($user);
+        //$n_logged = Auth::user()->name;
         $data = [
-            'n_users' => $n_users,
-            'n_roles' => $n_roles,
-            'n_perms' => $n_perms,
+            //'n_users' => $n_users,
+            //'n_roles' => $n_roles,
+            //'n_perms' => $n_perms,
             'n_logged' => $n_logged,
 
         ];
-        return view('admin.dashboard',$data);
+        return view('admincp.dashboard',$data);
     }
 
 }
