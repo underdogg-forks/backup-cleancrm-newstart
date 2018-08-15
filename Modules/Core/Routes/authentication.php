@@ -15,8 +15,8 @@ Route::group(['middleware' => ['web']], function () {
     // Authentication Routes...
     Route::get('login', ['uses' => 'App\Http\Controllers\Auth\LoginController@showLoginForm', 'as' => 'session.login']);
     Route::post('login', ['uses' => 'App\Http\Controllers\Auth\LoginController@login', 'as' => 'login']);
-    Route::get('getlogout', ['uses' => 'App\Http\Controllers\Auth\LoginController@logout', 'as' => 'session.logout']);
-    Route::post('logout', ['uses' => 'App\Http\Controllers\Auth\LoginController@logout', 'as' => 'logout']);
+    Route::get('getlogout', ['uses' => 'App\Http\Controllers\Auth\LoginController@logout', 'as' => 'session.getlogout']);
+    Route::post('logout', ['uses' => 'App\Http\Controllers\Auth\LoginController@logout', 'as' => 'session.logout']);
 
     // Registration Routes...
     Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');

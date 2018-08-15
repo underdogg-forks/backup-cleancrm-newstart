@@ -49,10 +49,13 @@
                     <span class="badge badge-info">42</span>
                 </a>
                 <div class="divider"></div>
-                {{--{{ route('session.logout') }}--}}
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-lock"></i> Logout
+
+                <a class="dropdown-item" href="{{ route('session.logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                    Logout
                 </a>
+                <form id="frm-logout" action="{{ route('session.logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
         </li>
     </ul>

@@ -4,8 +4,8 @@ namespace Modules\Core\Controllers\AdminCP;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\Permission;
+use Modules\Core\Models\Role;
+use Modules\Core\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
 class RolesController extends Controller
