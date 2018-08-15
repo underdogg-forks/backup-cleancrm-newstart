@@ -9,6 +9,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 
 
     @include('layouts._head')
@@ -36,6 +38,8 @@
 </div>
 
 <div id="modal-placeholder"></div>
+
+@stack('custom-scripts')
 
 </body>
 </html>

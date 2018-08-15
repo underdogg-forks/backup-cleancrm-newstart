@@ -29,11 +29,11 @@
 
     $(function () {
 
-        $.notifyDefaults({
+        /*$.notifyDefaults({
             placement: {
                 from: 'bottom'
             }
-        });
+        });*/
 
         $.ajaxSetup({
             headers: {

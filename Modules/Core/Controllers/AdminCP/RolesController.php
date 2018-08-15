@@ -2,27 +2,71 @@
 
 namespace Modules\Core\Controllers\AdminCP;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Core\Models\Role;
-use Modules\Core\Models\Permission;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\Core\Models\Permission;
+use Yajra\Datatables\Facades\Datatables;
+use Modules\Core\Models\Role;
+use Modules\Core\Repositories\RolesRepository;
 
 class RolesController extends Controller
 {
-    // Roles Listing Page
+    /** @var  RoleRepository */
+    private $roleRepository;
+
+    public function __construct(RolesRepository $roleRepo)
+    {
+        $this->roleRepository = $roleRepo;
+    }
+
+
+    /**
+     * Display a listing of the Role.
+     *
+     * @param RoleDataTable $roleDataTable
+     * @return Response
+     */
     public function index()
     {
-        //
-        $roles = Role::paginate(10);
-
-        $params = [
-            'title' => 'Roles Listing',
-            'roles' => $roles,
-        ];
-
-        return view('admincp.roles.roles_list')->with($params);
+        return view('admincp.roles.roles_index');
     }
+
+
+    public function anyData()
+    {
+        //->with('addresses')
+
+
+        $roles = Role::select(['id', 'name', 'display_name', 'description']);
+
+        return Datatables::of($roles)
+            ->addColumn('namelink', function ($roles) {
+                return '<a href="#">' . $roles->name . '</a>';
+            })
+            ->addColumn('display_name', function ($roles) {
+                return '<a href="roles/' . $roles->id . '" ">' . $roles->display_name . '</a>';
+            })
+            ->addColumn('description', function ($roles) {
+                return '<a href="roles/' . $roles->id . '" ">' . $roles->description . '</a>';
+            })
+            ->addColumn('edit', '
+                <a href="{{ route(\'roles.edit\', $id) }}" class="btn btn-success" >Edit</a>')
+            ->addColumn('delete', '
+                <form action="{{ route(\'roles.destroy\', $id) }}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" name="submit" value="Delete" class="btn btn-danger" onClick="return confirm(\'Are you sure?\')"">
+
+            {{csrf_field()}}
+            </form>')
+
+            ->rawColumns(['namelink', 'display_name', 'description', 'edit', 'delete'])
+
+
+
+            ->make(true);
+    }
+
 
     // Roles Creation Page
     public function create()
@@ -54,7 +98,8 @@ class RolesController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        return redirect()->route('roles.index')->with('success', "The role <strong>$role->name</strong> has successfully been created.");
+        return redirect()->route('roles.index')->with('success',
+            "The role <strong>$role->name</strong> has successfully been created.");
     }
 
     // Roles Delete Confirmation Page
@@ -125,7 +170,8 @@ class RolesController extends Controller
                 $role->attachPermission($value);
             }
 
-            return redirect()->route('roles.index')->with('success', "The role <strong>$role->name</strong> has successfully been updated.");
+            return redirect()->route('roles.index')->with('success',
+                "The role <strong>$role->name</strong> has successfully been updated.");
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
@@ -148,7 +194,8 @@ class RolesController extends Controller
 
             $role->forceDelete(); // Now force delete will work regardless of whether the pivot table has cascading delete
 
-            return redirect()->route('roles.index')->with('success', "The Role <strong>$role->name</strong> has successfully been archived.");
+            return redirect()->route('roles.index')->with('success',
+                "The Role <strong>$role->name</strong> has successfully been archived.");
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
