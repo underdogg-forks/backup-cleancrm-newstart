@@ -4,9 +4,9 @@ namespace Modules\Core\Controllers\AdminCP;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\Permission;
+use Modules\Core\Models\User;
+use Modules\Core\Models\Role;
+use Modules\Core\Models\Permission;
 
 class UsersController extends Controller
 {
@@ -27,7 +27,7 @@ class UsersController extends Controller
             'users' => $users,
         ];
 
-        return view('admin.users.users_list')->with($params);
+        return view('admincp.users.users_list')->with($params);
     }
 
     // Create User Page
@@ -40,7 +40,7 @@ class UsersController extends Controller
             'roles' => $roles,
         ];
 
-        return view('admin.users.users_create')->with($params);
+        return view('admincp.users.users_create')->with($params);
     }
 
     // Store New User
@@ -76,7 +76,7 @@ class UsersController extends Controller
                 'user' => $user,
             ];
 
-            return view('admin.users.users_delete')->with($params);
+            return view('admincp.users.users_delete')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
@@ -101,7 +101,7 @@ class UsersController extends Controller
                 'permissions' => $permissions,
             ];
 
-            return view('admin.users.users_edit')->with($params);
+            return view('admincp.users.users_edit')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');

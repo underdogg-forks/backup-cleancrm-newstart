@@ -21,8 +21,9 @@ Route::group(['prefix' => 'admincp', 'namespace' => 'Modules\Core\Controllers\Ad
 
 // Dashboard
 //Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    Route::get('/', ['uses' => 'AdminCPController@index', 'as' => 'dashboard.index']);
-    Route::get('dashboard', ['uses' => 'AdminCPController@index', 'as' => 'dashboard.index']);
+    Route::get('/', '\Modules\Core\Controllers\AdminCP\HomeController@admincp')->name('admincp');
+    //Route::get('/', ['uses' => 'AdminCPController@index', 'as' => 'dashboard.index']);
+    Route::get('dashboard', ['uses' => 'HomeController@index', 'as' => 'dashboard.index']);
 
     Route::get('permissions', ['uses' => 'PermissionsController@index', 'as' => 'permissions.index']);
 

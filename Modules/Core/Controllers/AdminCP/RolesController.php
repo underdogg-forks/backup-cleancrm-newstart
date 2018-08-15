@@ -21,7 +21,7 @@ class RolesController extends Controller
             'roles' => $roles,
         ];
 
-        return view('admin.roles.roles_list')->with($params);
+        return view('admincp.roles.roles_list')->with($params);
     }
 
     // Roles Creation Page
@@ -35,7 +35,7 @@ class RolesController extends Controller
             'permissions' => $permissions,
         ];
 
-        return view('admin.roles.roles_create')->with($params);
+        return view('admincp.roles.roles_create')->with($params);
     }
 
     // Roles Store to DB
@@ -69,7 +69,7 @@ class RolesController extends Controller
                 'role' => $role,
             ];
 
-            return view('admin.roles.roles_delete')->with($params);
+            return view('admincp.roles.roles_delete')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
@@ -93,7 +93,7 @@ class RolesController extends Controller
                 'role_permissions' => $role_permissions,
             ];
 
-            return view('admin.roles.roles_edit')->with($params);
+            return view('admincp.roles.roles_edit')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');

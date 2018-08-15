@@ -23,10 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /*public function index()
+    public function index()
     {
         return view('home');
-    }*/
+    }
+
+
+//Route::get('/', '\Modules\Core\Controllers\AdminCP\HomeController@admincp')->name('admincp');
+
 
     /**
      * Show the application dashboard.

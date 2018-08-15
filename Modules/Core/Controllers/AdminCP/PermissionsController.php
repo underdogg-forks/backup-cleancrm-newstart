@@ -6,20 +6,28 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Core\Models\User;
 use Modules\Core\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Modules\Core\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
 class PermissionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     // Permission Listing Page
     public function index()
     {
         //
         $permissions = Permission::paginate(10);
-        dd($permissions);
+        //dd($permissions);
 
         $params = [
             'title' => 'Permissions Listing',
+            'username' => Auth::user()->name,
             'permissions' => $permissions,
         ];
 
