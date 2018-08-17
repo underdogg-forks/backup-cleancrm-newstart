@@ -13,6 +13,7 @@
     "laracasts/flash": "^2.0",
     "laravel/framework": "5.4.*",
     "laravel/tinker": "~1.0",
+    "fzaninotto/company-name-generator": "dev-master",
     "laravelcollective/html": "^5.3.0",
     "santigarcor/laratrust": "5.0.*",
     "yajra/laravel-datatables-buttons": "1.0",

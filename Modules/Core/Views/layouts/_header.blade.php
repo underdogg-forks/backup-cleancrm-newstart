@@ -18,7 +18,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Customers</a>
-                <a class="dropdown-item" href="#">Employees</a>
+                <a class="dropdown-item" href="{{ route('employees.index') }}">Employees</a>
                 <a class="dropdown-item" href="#">Projects</a>
 
 

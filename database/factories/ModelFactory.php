@@ -41,3 +41,15 @@ $factory->define(Modules\Hrm\Models\Employee::class, function (Faker\Generator $
         'idnr' => $faker->businessIdentificationNumber,
     ];
 });
+
+
+
+
+$factory->define(Modules\Projects\Models\Project::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new CompanyNameGenerator\FakerProvider($faker));
+    return [
+        'name' => $faker->companyName,
+        'slug' => strtolower($faker->companyName),
+        'due_date' => $faker->dateTimeBetween('now', '2 years'),
+    ];
+});

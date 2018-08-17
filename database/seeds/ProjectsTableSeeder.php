@@ -1,8 +1,11 @@
 <?php
 
+
+
+
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ProjectsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ProjectsTableSeeder::class);
+      $projects = factory(Modules\Projects\Models\Project::class, 1000)->create();
     }
 }
