@@ -29,6 +29,36 @@
     </table>
     {{--</main>--}}
 
+    <div class="modal fade docs-example-modal-lg" tabindex="-1" id="projectmodal" aria-labelledby="exampleModalCenterTitle" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+
+
 @stop
 
 @push('custom-scripts')
@@ -40,6 +70,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     {{--<script src="/vendor/datatables/buttons.server-side.js"></script>--}}
 
 
@@ -59,6 +90,12 @@
                     {data: 'delete', name: 'delete', orderable: false, searchable: false},
                 ]
             });
+/*
+            var table = $('#projects-table').DataTable();
+
+            $('#projects-table tbody').on( 'click', 'tr', function () {
+                $('#projectmodal').modal("show");
+            });*/
         });
     </script>
 @endpush

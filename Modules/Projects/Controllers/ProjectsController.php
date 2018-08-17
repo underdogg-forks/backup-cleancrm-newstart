@@ -5,8 +5,8 @@ namespace Modules\Projects\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Yajra\Datatables\Facades\Datatables;
 use Modules\Projects\Models\Project;
+use Yajra\Datatables\Facades\Datatables;
 
 class ProjectsController extends Controller
 {
@@ -115,25 +115,11 @@ class ProjectsController extends Controller
     // Projects Editing Page
     public function edit($id)
     {
-        //
-        try {
-            $role = Project::findOrFail($id);
-            $permissions = Permission::all();
-            $role_permissions = $role->permissions()->get()->pluck('id')->toArray();
-
+            $project = Project::findOrFail($id);
             $params = [
-                'title' => 'Edit Project',
-                'role' => $role,
-                'permissions' => $permissions,
-                'role_permissions' => $role_permissions,
+                'project' => $project,
             ];
-
-            return view('admincp.projects.projects_edit')->with($params);
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
-                return response()->view('errors.' . '404');
-            }
-        }
+        return view('projects.projects_edit')->with($params);
     }
 
     // Projects Update to DB
