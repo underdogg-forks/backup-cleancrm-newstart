@@ -6,3 +6,5 @@
 @endif
 
 <script src="{{ asset('assets/dist/dependencies.js') }}"></script>
+
+<link href="{{ asset('assets/dist/skin-custom.min.css') }}" rel="stylesheet" type="text/css"/>

@@ -32,7 +32,7 @@ module.exports = function (grunt) {
       },
       files: {
         'public/assets/dist/app.css': 'resources/assets/sass/app.scss',
-        'public/assets/dist/adminlte/css/skins/skin-invoiceplane.min.css': 'resources/assets/sass/skin-invoiceplane.scss'
+        'public/assets/dist/skin-custom.min.css': 'resources/assets/sass/skin-custom.scss'
       }
     },
     build: {
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       },
       files: {
         'public/assets/dist/app.css': 'resources/assets/sass/app.scss',
-        'public/assets/dist/adminlte/css/skins/skin-invoiceplane.min.css': 'resources/assets/sass/skin-invoiceplane.scss'
+        'public/assets/dist/skin-custom.min.css': 'resources/assets/sass/skin-custom.scss'
       }
     }
   });

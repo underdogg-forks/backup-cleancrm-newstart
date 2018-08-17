@@ -21,6 +21,7 @@
 
     @yield('javascript')
 
+
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 
