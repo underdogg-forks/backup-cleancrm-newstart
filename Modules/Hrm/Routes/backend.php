@@ -29,5 +29,5 @@ Route::group(['prefix' => 'hrm', 'middleware' => 'web', 'namespace' => 'Modules\
 
 
 Route::group(['prefix' => 'api', 'middleware' => 'web', 'namespace' => 'Modules\Hrm\Controllers'], function () {
-    Route::get('employeesdata', ['as' => 'api.employees.data', 'uses' => 'RolesController@anyData']);
+    Route::get('employeesdata', ['as' => 'api.employeez.data', 'uses' => 'EmployeesController@anyData']);
 }); // End of ADMIN group

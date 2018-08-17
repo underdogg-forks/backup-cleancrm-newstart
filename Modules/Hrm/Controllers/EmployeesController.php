@@ -27,37 +27,17 @@ class EmployeesController extends Controller
 
     public function anyData()
     {
-        $permissions = Permission::select(['id', 'name', 'display_name', 'description']);
-
-        return Datatables::of($permissions)
-            ->addColumn('id', function ($permissions) {
-                return '<a href="permissions/' . $permissions->id . '" ">' . $permissions->display_name . '</a>';
-            })
-            ->make(true);
-    }
-
-
-
-
-
-    public function oldData()
-    {
-        //, 'first_name', 'last_name', 'bsn', 'idnr'])->orderBy('last_name', 'ASC')->orderBy('first_name', 'ASC')
-
-        $employees = Employee::select(['id', 'first_name']);
+        $employees = Employee::select(['id', 'first_name', 'last_name', 'idnr']);
 
         return Datatables::of($employees)
             ->addColumn('first_name', function ($employees) {
                 return '<a href="#">' . $employees->first_name . '</a>';
             })
             ->addColumn('last_name', function ($employees) {
-                return '<a href="employee/' . $employees->id . '" ">' . $employees->last_name . '</a>';
-            })
-            ->addColumn('bsn', function ($employees) {
-                return '<a href="employee/' . $employees->id . '" ">' . $employees->bsn . '</a>';
+                return '<a href="employees/' . $employees->id . '" ">' . $employees->last_name . '</a>';
             })
             ->addColumn('idnr', function ($employees) {
-                return '<a href="employee/' . $employees->id . '" ">' . $employees->idnr . '</a>';
+                return '<a href="employees/' . $employees->id . '" ">' . $employees->idnr . '</a>';
             })
             ->addColumn('edit', '
                 <a href="{{ route(\'employees.edit\', $id) }}" class="btn btn-success" >Edit</a>')
@@ -68,12 +48,12 @@ class EmployeesController extends Controller
 
             {{csrf_field()}}
             </form>')
-            ->rawColumns(['first_name', 'email', 'edit', 'delete'])
-            //->orderColumn('last_name', '-name $1')
+            ->rawColumns(['first_name', 'last_name', 'idnr', 'edit', 'delete'])
             ->orderColumns(['first_name', 'email'], '-:column $1')
-
             ->make(true);
     }
+
+
 
 
 
@@ -139,17 +119,17 @@ class EmployeesController extends Controller
             $employee = Employee::findOrFail($id);
 
             //$employee = Role::all();
-            $employee = Role::with('permissions')->get();
+            $roles = Role::with('permissions')->get();
             $permissions = Permission::all();
 
             $params = [
                 'title' => 'Edit Employee',
-                'Employee' => $employee,
                 'employee' => $employee,
+                'roles' => $roles,
                 'permissions' => $permissions,
             ];
 
-            return view('admincp.employee.employee_edit')->with($params);
+            return view('hrm.employees.employees_edit')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');

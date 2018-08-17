@@ -48,7 +48,7 @@
                 serverSide: true,
                 "pageLength": 50,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                ajax: '{!! route('api.employees.data') !!}',
+                ajax: '{!! route('api.employeez.data') !!}',
                 columns: [
                     {data: 'first_name', name: 'name'},
                     {data: 'last_name', name: 'display_name'},
