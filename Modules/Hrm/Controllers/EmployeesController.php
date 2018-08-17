@@ -123,7 +123,7 @@ class EmployeesController extends Controller
             $permissions = Permission::all();
 
             $params = [
-                'title' => 'Edit Employee',
+                'title' => 'Bewerk Medewerker',
                 'employee' => $employee,
                 'roles' => $roles,
                 'permissions' => $permissions,

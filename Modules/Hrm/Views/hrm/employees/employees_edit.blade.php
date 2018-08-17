@@ -4,10 +4,8 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Bewerk medewerker</h1>
+        <h1 class="h2">Bewerk medewerker: {{$employee->first_name}} {{$employee->last_name}}</h1>
     </div>
-    <a class="btn btn-sm btn-primary" href="{{route('employees.index')}}">Back</a>
-    <h2>{{$title}}</h2>
     <form method="post" action="{{ route('employees.update', ['id' => $employee->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} row">
@@ -33,6 +31,7 @@
 
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button type="submit" class="btn btn-danger">Ziekmelding</button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <input name="_method" type="hidden" value="PUT">
                 <button type="submit" class="btn btn-success">Opslaan</button>
